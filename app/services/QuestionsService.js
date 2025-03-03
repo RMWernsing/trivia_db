@@ -1,5 +1,6 @@
 import { AppState } from "../AppState.js";
 import { Question } from "../models/QuestionModel.js";
+import { Pop } from "../utils/Pop.js";
 
 // @ts-ignore
 const questionsApi = axios.create({
@@ -9,8 +10,19 @@ const questionsApi = axios.create({
 
 class QuestionsService {
 
+  checkCorrectAnswer(guess, id) {
+    const question = AppState.questions
+
+    if (guess == question.correctAnswer) {
+      Pop.success(`You're a Genius!!!`)
+    }
+    else {
+      return Pop.toast(`You're dumb. go back to school.`)
+    }
+  }
+
   async getQuestions() {
-    const response = await questionsApi.get('?amount=20&category=15')
+    const response = await questionsApi.get('?amount=21&category=15')
     console.log('got questions', response.data);
 
     const questions = response.data.results.map(pojo => new Question(pojo))

@@ -1,5 +1,8 @@
+import { generateId } from "../utils/GenerateId.js"
+
 export class Question {
   constructor(data) {
+    this.id = generateId()
     this.type = data.type
     this.difficulty = data.difficulty
     this.category = data.category
@@ -12,14 +15,12 @@ export class Question {
   }
 
 
-  get answers() {
-    let answer = ''
-    this.allAnswers.forEach(answer => answer += `<button>${this.allAnswers}</button>`)
+  get answersButtons() {
+    let content = ''
+    this.allAnswers.forEach(answer => content += `<button onclick="app.questionsController.checkAnswer('${answer}', '${this.id}')" type="button" class="btn btn-light mx-1 mt-2">${answer}</button>`)
 
-    return answer
+    return content
   }
-
-
 
   get questionsTemplate() {
     return `
@@ -31,8 +32,8 @@ export class Question {
         <p class="fs-5">
           ${this.question}
         </p>
-        <div>
-          ${this.allAnswers}
+        <div class="d-flex justify-content-center">
+          ${this.answersButtons}
         </div>
       </div>
     </div>

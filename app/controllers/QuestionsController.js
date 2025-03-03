@@ -19,6 +19,10 @@ export class QuestionsController {
     }
   }
 
+  checkAnswer(guess, id) {
+    questionsService.checkCorrectAnswer(guess, id)
+  }
+
   drawQuestions() {
     const questions = AppState.questions
     let questionCardContent = ''
