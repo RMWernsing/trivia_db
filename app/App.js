@@ -1,8 +1,10 @@
 import { ExampleController } from './controllers/ExampleController.js';
+import { QuestionsController } from './controllers/QuestionsController.js';
+
 
 class App {
 
-  ExampleController = new ExampleController() // ☑️ you can remove this - example only
+  questionsController = new QuestionsController
 
 }
 
